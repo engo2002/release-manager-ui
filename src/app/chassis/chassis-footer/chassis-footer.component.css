@@ -1,0 +1,44 @@
+/* Füge das Font Awesome CSS ein */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+/* Globale Stile */
+:root {
+  --rm-dark-blue: #004d99; /* Beispiel für eine dunkelblaue Farbe */
+}
+
+/* Footer-Stile */
+body {
+  margin: 0;
+  padding-bottom: 200px; /* Platz für den sticky Footer */
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rm-footer-right {
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.rm-footer-text {
+  margin-right: 20px;
+}
+
+.github-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  vertical-align: sub;
+}
+
+.github-link {
+  margin-bottom: 12px;
+  text-decoration: none;
+}
+
+.github-link:hover {
+  color: var(--rm-gray) !important;
+}

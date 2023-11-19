@@ -1,0 +1,62 @@
+/* material dialog override */
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: var(--rm-white);
+  --mdc-dialog-subhead-color: var(--rm-green);
+}
+
+/* material toggle override */
+.mat-mdc-slide-toggle {
+  --mdc-switch-disabled-selected-handle-color: var(--rm-gray);
+  --mdc-switch-disabled-unselected-handle-color: var(--rm-gray);
+  --mdc-switch-disabled-selected-track-color: var(--rm-gray);
+  --mdc-switch-disabled-unselected-track-color: var(--rm-gray);
+  --mdc-switch-unselected-focus-state-layer-color: var(--rm-gray);
+  --mdc-switch-unselected-pressed-state-layer-color: var(--rm-gray);
+  --mdc-switch-unselected-hover-state-layer-color: var(--rm-gray);
+  --mdc-switch-unselected-focus-track-color: var(--rm-gray);
+  --mdc-switch-unselected-hover-track-color: var(--rm-gray);
+  --mdc-switch-unselected-pressed-track-color: var(--rm-gray);
+  --mdc-switch-unselected-track-color: var(--rm-gray);
+  --mdc-switch-unselected-focus-handle-color: var(--rm-black);
+  --mdc-switch-unselected-hover-handle-color: var(--rm-black);
+  --mdc-switch-unselected-pressed-handle-color: var(--rm-gray);
+  --mdc-switch-handle-surface-color: var(--rm-black);
+  --mdc-switch-unselected-handle-color: var(--rm-black);
+  --mdc-switch-selected-icon-color: var(--rm-white);
+  --mdc-switch-disabled-selected-icon-color: var(--rm-dark-green);
+  --mdc-switch-disabled-unselected-icon-color: var(--rm-gray);
+  --mdc-switch-unselected-icon-color: var(--rm-white);
+}
+
+.mat-mdc-slide-toggle.mat-accent {
+  --mdc-switch-selected-focus-state-layer-color: var(--rm-green);
+  --mdc-switch-selected-handle-color: var(--rm-green);
+  --mdc-switch-selected-hover-state-layer-color: var(--rm-dark-green);
+  --mdc-switch-selected-pressed-state-layer-color: var(--rm-green);
+  --mdc-switch-selected-focus-handle-color: var(--rm-green);
+  --mdc-switch-selected-hover-handle-color: var(--rm-green);
+  --mdc-switch-selected-pressed-handle-color: var(--rm-green);
+  --mdc-switch-selected-focus-track-color: var(--rm-gray);
+  --mdc-switch-selected-hover-track-color: var(--rm-gray);
+  --mdc-switch-selected-pressed-track-color: var(--rm-gray);
+  --mdc-switch-selected-track-color: var(--rm-gray);
+}
+
+/* material snackbar override */
+.mat-mdc-snack-bar-container {
+  &.snackbar {
+    --mdc-snackbar-container-color: var(--rm-green);
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+  &.snackbar-error {
+    --mdc-snackbar-container-color: var(--rm-red);
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+  &.snackbar-info {
+    --mdc-snackbar-container-color: var(--rm-black);
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+}

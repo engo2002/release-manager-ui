@@ -1,0 +1,7 @@
+.menu-category {
+    padding: 10px;
+}
+
+.menu-category-button:hover {
+    border: 2px solid var(--rm-light-blue);
+}

@@ -1,0 +1,18 @@
+<div class="header">
+	<div class="left">
+		<h1>releaseManager</h1>
+	</div>
+	<div class="right">
+		<button class="btn btn-dark-blue menu-button" *ngIf="isMobile" (click)="toggleMenu()"><i class="fa fa-bars btn-icon"></i>Menu</button>
+		<div class="sidebar" [ngClass]="{'show-menu': showMenu && isMobile}">
+			<app-chassis-menu></app-chassis-menu>
+			<div class="menu-category">
+				<a class="link" (click)="toggleMenu()"><i class="fa fa-arrow-left btn-icon"></i>Schließen</a>
+			</div>
+		</div>
+		<div class="menu-horiz" *ngIf="!showMenu && !isMobile">
+			<app-chassis-menu class="menu-horiz-items"></app-chassis-menu>
+		</div>
+	</div>
+
+</div>

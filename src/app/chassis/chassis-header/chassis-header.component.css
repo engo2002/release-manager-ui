@@ -1,0 +1,47 @@
+h1 {
+    color: var(--rm-white) !important;
+    margin-left: 20px;
+}
+
+.menu-horiz {
+    display: flex;
+}
+
+.menu-horiz-items {
+    display: flex;
+}
+
+.menu-button {
+    margin-right: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: var(--rm-dark-blue);
+    color: var(--rm-white);
+    transition: left 0.3s ease;
+}
+.show-menu {
+    left: 0; /* Zeige die Sidebar */
+}
+
+@media screen and (max-width: 767px) {
+    button {
+        display: block;
+    }
+
+    .sidebar {
+        display: block;
+    }
+}
