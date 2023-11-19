@@ -27,7 +27,6 @@
             "styles": [
               "src/colors.css",
               "src/font.css",
-              "src/ext/fontawesome/css/all.css",
               "src/styles.css",
               "src/custom-theme.scss"
             ],
