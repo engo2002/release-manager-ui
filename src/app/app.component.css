@@ -1,0 +1,53 @@
+.container {
+    position: relative;
+    padding-top: 60px; /* Platz für den Header */
+    padding-bottom: 60px; /* Platz für den Footer */
+}
+
+.rm-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    min-height: 60px;
+    background-color: var(--rm-dark-blue);
+    color: var(--rm-white);
+    z-index: 1000;
+}
+
+.router-wrapper {
+    min-height: calc(68vh - 120px); /* 68vh abzüglich des Platzes für Header und Footer */
+    padding-top: 60px; /* Platz für den Header */
+    padding-bottom: 60px; /* Platz für den Footer */
+}
+
+.rm-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--rm-dark-blue);
+    color: white;
+    padding: 20px;
+    height: 30px;
+    transition: height 0.3s ease-in-out;
+}
+
+.rm-footer:hover {
+    height: 60px;
+}
+
+@media screen and (max-width: 767px) {
+    .rm-header {
+        justify-content: space-between;
+        padding-bottom: 12px;
+    }
+
+    .container {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+
+    .router-wrapper {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+}

@@ -1,0 +1,7 @@
+/* Roboto Condensed - Regular */
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url('src/assets/font/RobotoCondensed-Regular.ttf') format('truetype'); /* TTF */
+}
