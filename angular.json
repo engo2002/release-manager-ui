@@ -28,7 +28,11 @@
               "src/colors.css",
               "src/font.css",
               "src/styles.css",
-              "src/custom-theme.scss"
+              "src/custom-theme.scss",
+              "node_modules/primeng/resources/themes/lara-dark-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/@engo/engo-ui-kit-lib/src/lib/style/main.css",
+              "node_modules/@engo/engo-ui-kit-lib/src/lib/style/colors.css"
             ],
             "scripts": []
           },
@@ -55,6 +59,16 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "local": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -67,6 +81,9 @@
             },
             "development": {
               "browserTarget": "release-manager-ui:build:development"
+            },
+            "local": {
+              "browserTarget": "release-manager-ui:build:local"
             }
           },
           "defaultConfiguration": "development"

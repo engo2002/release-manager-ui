@@ -27,7 +27,7 @@
     background-color: var(--rm-dark-blue);
     color: white;
     padding: 20px;
-    height: 30px;
+    height: 60px;
     transition: height 0.3s ease-in-out;
 }
 
