@@ -1,1 +1,24 @@
-<p>project-create works!</p>
+<h2 mat-dialog-title>Projekt hinzufügen</h2>
+<mat-dialog-content>
+  <form [formGroup]="projectForm" class="create-form">
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput placeholder="Beschreibung" formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Link" formControlName="link">
+    </mat-form-field>
+    <mat-error *ngIf="projectForm.get('name')?.hasError('required')">Name ist erforderlich</mat-error>
+    <mat-error *ngIf="projectForm.get('description')?.hasError('required')">Beschreibung ist erforderlich</mat-error>
+    <mat-error *ngIf="projectForm.get('link')?.hasError('required')">Link ist erforderlich</mat-error>
+    <mat-error *ngIf="projectForm.get('link')?.hasError('pattern')">Ungültiger Link</mat-error>
+  </form>
+  <div class="button-container">
+    <button class="btn btn-submit" (click)="onSubmit()">Projekt erstellen</button>
+  </div>
+
+</mat-dialog-content>

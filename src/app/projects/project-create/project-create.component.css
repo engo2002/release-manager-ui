@@ -1,0 +1,10 @@
+.create-form {
+  display: flex;
+  flex-direction: column;
+  max-width: fit-content;
+}
+
+.button-container {
+  display: flex;
+  justify-content: right;
+}
