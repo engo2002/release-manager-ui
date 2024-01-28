@@ -3,3 +3,11 @@
 html {
   background-color: white;
 }
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+p {
+  color: var(--rm-black);
+}

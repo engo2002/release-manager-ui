@@ -1,0 +1,50 @@
+<div class="titlebox">
+  <h1 *ngIf="isNew" class="title">Release hinzufügen</h1>
+  <h1 *ngIf="!isNew" class="title">Release bearbeiten</h1>
+</div>
+<engo-uik-table-loading *ngIf="loading"></engo-uik-table-loading>
+<div *ngIf="!loading || isNew" class="form">
+  <form [formGroup]="releaseForm">
+    <div class="release-general">
+      <h2>Allgemein</h2>
+      <mat-form-field>
+        <mat-label>Release Number</mat-label>
+        <input matInput formControlName="releaseNumber" required>
+        <mat-error *ngIf="releaseForm.get('releaseNumber').hasError('required')">Release Number is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Headline</mat-label>
+        <input matInput formControlName="headline" required>
+        <mat-error *ngIf="releaseForm.get('headline').hasError('required')">Headline is required</mat-error>
+      </mat-form-field>
+    </div>
+  <div class="release-field">
+    <h2>Major</h2>
+    <app-ck-editor [data]="majorHtmlBackup"  (newData)="setEditorData($event, 'major')"></app-ck-editor>
+    <mat-checkbox formControlName="showMajorInWhatsNew">Major in What's New Dialog anzeigen</mat-checkbox>
+  </div>
+
+  <div class="release-field">
+    <h2>Minor</h2>
+    <app-ck-editor [data]="minorHtmlBackup" (newData)="setEditorData($event, 'minor')"></app-ck-editor>
+    <mat-checkbox formControlName="showMinorInWhatsNew">Minor in What's New Dialog anzeigen</mat-checkbox>
+  </div>
+
+  <div class="release-field">
+    <h2>Bugfix</h2>
+    <app-ck-editor [data]="bugfixHtmlBackup"  (newData)="setEditorData($event, 'bugfix')"></app-ck-editor>
+    <mat-checkbox formControlName="showBugfixInWhatsNew">Bugfix in What's New Dialog anzeigen</mat-checkbox>
+  </div>
+
+  <div class="release-field">
+    <h2>Diverses</h2>
+    <app-ck-editor [data]="otherHtmlBackup"  (newData)="setEditorData($event, 'other')"></app-ck-editor>
+    <mat-checkbox formControlName="showOtherInWhatsNew">Diverses in What's New Dialog anzeigen</mat-checkbox>
+  </div>
+  </form>
+  <div class="action-buttons">
+    <button *ngIf="isNew" class="btn" (click)="create()" [disabled]="releaseForm.invalid">Erstellen</button>
+    <button *ngIf="!isNew" class="btn" (click)="edit()" [disabled]="releaseForm.invalid">Speichern</button>
+    <button class="btn btn-dark-blue" (click)="toReleases()">Abbrechen</button>
+  </div>
+</div>

@@ -10,6 +10,10 @@ import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { UikTableLoadingModule } from "@engo/engo-ui-kit-lib";
+import { ProjectReleaseListComponent } from './project-release-list/project-release-list.component';
+import { ProjectReleaseCreateEditComponent } from './project-release-create-edit/project-release-create-edit.component';
+import { CkeditorModule } from "../shared-modules/ckeditor/ckeditor.module";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 
 
@@ -17,7 +21,9 @@ import { UikTableLoadingModule } from "@engo/engo-ui-kit-lib";
   declarations: [
     ProjectListComponent,
     ProjectCreateComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    ProjectReleaseListComponent,
+    ProjectReleaseCreateEditComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +33,9 @@ import { UikTableLoadingModule } from "@engo/engo-ui-kit-lib";
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
-    UikTableLoadingModule
+    UikTableLoadingModule,
+    CkeditorModule,
+    MatCheckboxModule
   ]
 })
 export class ProjectsModule { }

@@ -1,0 +1,4 @@
+<!--suppress ALL -->
+<ckeditor (change)="emitChange($event)" (ready)="onReady($event)" *ngIf="!loading" [config]="editorConfig" [data]="data"
+          [editor]="editor"></ckeditor>
+<p-skeleton *ngIf="loading" height="200px" width="98%"></p-skeleton>

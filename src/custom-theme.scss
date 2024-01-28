@@ -1,3 +1,38 @@
+@use "@angular/material" as mat;
+@include mat.core();
+$primary: mat.define-palette(mat.$blue-palette, 900);
+$accent: mat.define-palette(mat.$gray-palette, 500);
+$warn: mat.define-palette(mat.$red-palette, 900);
+$custom-typography: mat.define-typography-config(
+  $font-family: "Roboto, sans-serif",
+  $headline-1: mat.define-typography-level(20px, 24px, 500, "Roboto", "normal"),
+  $headline-2: mat.define-typography-level(16px, 24px, 500, "Roboto", "normal"),
+  $headline-3: mat.define-typography-level(14px, 24px, 500, "Roboto", "normal"),
+  $headline-4: mat.define-typography-level(20px, 24px, 500, "Roboto", "normal"),
+  $headline-5: mat.define-typography-level(20px, 24px, 500, "Roboto", "normal"),
+  $headline-6: mat.define-typography-level(20px, 24px, 500, "Roboto", "normal"),
+  $subtitle-1: mat.define-typography-level(11pt, 24px, 500, "Roboto", "normal"),
+  $subtitle-2: mat.define-typography-level(13px, 24px, 500, "Roboto", "normal"),
+  $body-2: mat.define-typography-level(14px, 24px, 500, "Roboto", "normal"),
+  $body-1: mat.define-typography-level(14px, 20px, 400, "Roboto", "normal"),
+  $caption: mat.define-typography-level(14px, 20px, 400, "Roboto", "normal"),
+  $button: mat.define-typography-level(14px, 14px, 500, "Roboto", "normal"),
+  $overline: mat.define-typography-level(14px, 14px, 500, "Roboto", "normal"),
+);
+$theme: mat.define-light-theme(
+    (
+      color: (
+        primary: $primary,
+        accent: $accent,
+        warn: $warn,
+      ),
+      typography: $custom-typography,
+      density: 0,
+    )
+);
+@include mat.all-component-typographies($custom-typography);
+@include mat.all-component-themes($theme);
+
 /* material dialog override */
 .mat-mdc-dialog-container {
   --mdc-dialog-container-color: var(--rm-white);

@@ -1,0 +1,20 @@
+.form {
+  width: 600px;
+}
+mat-form-field {
+  display: flex;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.release-field, .release-general {
+  margin-bottom: 16px;
+}
+
+.action-buttons > button {
+  margin-right: 12px;
+}
