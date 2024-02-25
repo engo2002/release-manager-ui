@@ -1,3 +1,3 @@
 export const environment = {
-    backendUrl: window["env"]["backendUrl"] || "default",
+    backendUrl: window["env"]["baseurl"] || "default",
 };
