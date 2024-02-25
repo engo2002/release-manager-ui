@@ -4,7 +4,7 @@ COPY package.json /usr/local/app
 COPY package-lock.json /usr/local/app
 RUN npm ci --legacy-peer-deps
 COPY ./ /usr/local/app/
-RUN npm run build:prod
+RUN npm run build
 
 FROM nginx:latest
 COPY --from=build /usr/local/app/dist/release-manager-ui /usr/share/nginx/html/release-manager-ui
