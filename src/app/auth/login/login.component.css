@@ -1,0 +1,97 @@
+.title-container {
+  height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.login-header-container {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+  height: 50vh;
+}
+
+/* Logo-Design */
+.logo {
+  font-size: 34pt;
+  font-weight: bold;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 100px;
+}
+
+.company,
+.company-details {
+  color: #939393;
+}
+
+.app-label,
+.app-label-details {
+  color: #00823e;
+}
+
+.company-details,
+.app-label-details {
+  font-size: 10pt;
+}
+
+.app-label-details {
+  margin-right: 10px;
+}
+
+.login-card-container {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 350px;
+  max-width: 450px;
+  height: fit-content;
+}
+
+.login-card {
+  width: 100%;
+  height: fit-content;
+}
+
+.login-card-title {
+  text-align: center;
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
+.mat-mdc-card-title {
+  margin-top: 24px !important;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 850px) {
+  .login-header-container {
+    flex-direction: column;
+  }
+
+  .logo {
+    margin-right: 0;
+    font-size: 28pt;
+  }
+
+  .title-container {
+    align-items: flex-start;
+    margin-top: 30px;
+    height: 25vh;
+    min-height: 200px;
+  }
+
+  .login-card {
+    height: fit-content;
+  }
+}

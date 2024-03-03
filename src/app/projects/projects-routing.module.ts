@@ -21,7 +21,7 @@ const routes: Routes = [
 			},
       {
         path: ":projectId/releases",
-        component: ProjectReleaseListComponent
+        component: ProjectReleaseListComponent,
       },
       {
         path: ":projectId/releases/create",
