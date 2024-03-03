@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgModel } from "@angular/forms";
+import { FormControl, FormGroup, NgModel, Validators } from "@angular/forms";
 import { AuthService } from "../auth.service";
 import { EMPTY, Observable, Subscription, tap } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
@@ -19,19 +19,23 @@ import { catchError } from "rxjs/operators";
 export class LoginComponent implements OnInit, OnDestroy{
   isLoggedIn = false;
   isLoggingIn = false;
-  username = "";
-  password: NgModel | undefined;
   loginDisabled = false;
   loginSnoozeActive = false;
   loginSnoozeTime = 0;
   loginSnoozeCountdown: CountdownConfig = {};
   loginSuccessful = false;
   hidePassword = true;
-  stayLoggedIn = true;
   credentialsChecked = false;
   showLoadingCircle = false;
   tfaEnabled = false;
-  code = "";
+  loginForm?: FormGroup = new FormGroup({
+    username: new FormControl("", [Validators.required]),
+    password: new FormControl("", Validators.required),
+    stayLoggedIn: new FormControl("", Validators.required),
+  });
+  loginMfaForm?: FormGroup = new FormGroup({
+    tfa: new FormControl("", [Validators.required]),
+  });
 
   private loginSubscription: Subscription = new Subscription();
   private permissionSubscription: Subscription = new Subscription();
@@ -50,13 +54,13 @@ export class LoginComponent implements OnInit, OnDestroy{
     }
     const lsStayLoggedIn = localStorage.getItem("stayLoggedIn");
     if (!_isEmpty(lsStayLoggedIn)) {
-      this.stayLoggedIn = JSON.parse(lsStayLoggedIn!);
+      this.stayLoggedIn.setValue(JSON.parse(lsStayLoggedIn!));
     }
   }
 
   public login() {
     this.showLoadingCircle = true;
-    this.login$(this.username, this.password!.value).subscribe((loginPayload) => {
+    this.login$().subscribe((loginPayload) => {
       this.loginSuccessful = true;
       this.isLoggedIn = true;
       this.resetLoginSnooze();
@@ -81,16 +85,20 @@ export class LoginComponent implements OnInit, OnDestroy{
   }
 
   stayLoggedInChange($event: MatCheckboxChange) {
-    this.stayLoggedIn = $event.checked;
+    this.stayLoggedIn.setValue($event.checked);
     localStorage.setItem("stayLoggedIn", String($event.checked));
   }
 
   checkCredentials(password: NgModel) {
-    this.password = password;
-    this.authApi.authControllerValidateLogin({username: this.username, password: this.password.value}).subscribe({
+    this.password.setValue(password);
+    this.authApi.authControllerValidateLogin({username: this.username.value, password: this.password.value}).subscribe({
       next: (validation) => {
         this.credentialsChecked = validation.credentialsValid;
         this.tfaEnabled = !!validation.twoFactorEnabled ? validation.twoFactorEnabled : false;
+        localStorage.setItem("loginCount", "0");
+        if (!this.tfaEnabled) {
+          this.login();
+        }
       },
       error: () => {
         this.credentialsChecked = false;
@@ -100,8 +108,8 @@ export class LoginComponent implements OnInit, OnDestroy{
     });
   }
 
-  private login$(username: string, password: string): Observable<ILoginPayload> {
-    return this.authApi.authControllerLogin({username: username, password: password, stayLoggedIn: this.stayLoggedIn, code: this.code}).pipe(
+  private login$(): Observable<ILoginPayload> {
+    return this.authApi.authControllerLogin({username: this.username.value, password: this.password.value, stayLoggedIn: this.stayLoggedIn.value, code: this.tfaEnabled ? this.code.value : undefined}).pipe(
       tap((loginstatus) => {
         this.loginDisabled = true;
         this.isLoggedIn = true;
@@ -125,8 +133,8 @@ export class LoginComponent implements OnInit, OnDestroy{
   private clearAndDisableInputAndSnoozeLogin() {
     this.loginDisabled = true;
     this.loginSnoozeActive = true;
-    if (this.username && this.password && this.password.value) {
-      this.code = "";
+    if (this.tfaEnabled) {
+      this.code.value("");
     }
   }
 
@@ -135,11 +143,11 @@ export class LoginComponent implements OnInit, OnDestroy{
     if (!_isEmpty(loginCount) && loginCount !== null) {
       if (parseInt(loginCount, 10) >= 2) {
         const newLoginCount = (parseInt(loginCount, 10) + 1).toString(10);
-        this.loginSnoozeTime = 300;
+        this.loginSnoozeTime = 30;
         localStorage.setItem("loginCount", newLoginCount);
       } else {
         const newLoginCount = (parseInt(loginCount, 10) + 1).toString(10);
-        this.loginSnoozeTime = parseInt(loginCount, 10) * 5;
+        this.loginSnoozeTime = 5;
         localStorage.setItem("loginCount", newLoginCount);
       }
     } else {
@@ -157,5 +165,21 @@ export class LoginComponent implements OnInit, OnDestroy{
     localStorage.setItem("loginCount", "0");
     this.loginSnoozeTime = 0;
     this.loginSnoozeActive = false;
+  }
+
+  get username() {
+    return this.loginForm.get("username");
+  }
+
+  get password() {
+    return this.loginForm.get("password");
+  }
+
+  get stayLoggedIn() {
+    return this.loginForm.get("stayLoggedIn");
+  }
+
+  get code() {
+    return this.loginMfaForm.get("tfa");
   }
 }

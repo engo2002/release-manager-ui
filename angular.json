@@ -77,13 +77,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "release-manager-ui:build:production"
+              "buildTarget": "release-manager-ui:build:production"
             },
             "development": {
-              "browserTarget": "release-manager-ui:build:development"
+              "buildTarget": "release-manager-ui:build:development"
             },
             "local": {
-              "browserTarget": "release-manager-ui:build:local"
+              "buildTarget": "release-manager-ui:build:local"
             }
           },
           "defaultConfiguration": "development"
@@ -91,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "release-manager-ui:build"
+            "buildTarget": "release-manager-ui:build"
           }
         },
         "test": {

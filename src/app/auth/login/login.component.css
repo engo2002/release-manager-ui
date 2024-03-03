@@ -14,34 +14,24 @@
   height: 50vh;
 }
 
-/* Logo-Design */
-.logo {
-  font-size: 34pt;
-  font-weight: bold;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 100px;
-}
-
-.company,
-.company-details {
+.header {
   color: #939393;
 }
 
-.app-label,
-.app-label-details {
-  color: #00823e;
+.header-icon {
+  margin-right: 12px;
 }
 
-.company-details,
-.app-label-details {
+.mat-mdc-form-field {
+  display: block !important;
+}
+
+.app-label {
+  color: var(--rm-dark-blue);
+}
+
+.header-details {
   font-size: 10pt;
-}
-
-.app-label-details {
-  margin-right: 10px;
 }
 
 .login-card-container {

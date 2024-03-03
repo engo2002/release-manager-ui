@@ -3,10 +3,6 @@
     <h1>Herzlich Willkommen!</h1>
   </div>
   <div class="login-header-container">
-    <div class="logo">
-      <div><span class="company">company</span><span class="app-label">Suite</span></div>
-      <div><span class="company-details">company</span><span class="app-label-details">SSO</span> <span class="company-details">company</span><span class="app-label-details">INTRA</span> <span class="company-details">company</span><span class="app-label-details">Time</span></div>
-    </div>
     <div class="login-form">
       <div class="login-card-container">
         <mat-card class="login-card">
@@ -14,63 +10,37 @@
           ><h1><i class="fa-solid fa-arrow-right-to-bracket header-icon"></i>Einloggen</h1>
           </mat-card-title>
           <mat-card-content>
-            <form #loginCredentials="ngForm" *ngIf="!credentialsChecked && !showLoadingCircle" class="form" ngNativeValidate>
-              <h3><i class="fa-solid fa-key header-icon"></i>Anmeldedaten</h3>
-              <div class="username-field">
-                <mat-form-field appearance="fill">
-                  <mat-label>Benutzername oder E-Mail</mat-label>
-                  <input #usernameInp="ngModel" [(ngModel)]="username" [disabled]="loginDisabled" matInput name="username" required type="text" />
-                </mat-form-field>
-              </div>
-
-              <div class="alert">
-                <div *ngIf="usernameInp.invalid && usernameInp.touched && usernameInp.errors && usernameInp.errors['required']">Geben Sie Ihren Benutzernamen oder Ihre E-Mail-Adresse ein.</div>
-              </div>
-
-              <div class="password-field">
-                <mat-form-field appearance="fill">
-                  <mat-label>Passwort</mat-label>
-                  <input #password="ngModel" [disabled]="loginDisabled" [type]="hidePassword ? 'password' : 'text'" matInput name="password" ngModel required />
-                  <i (click)="hidePassword = !hidePassword" [class]="hidePassword ? 'fa fa-eye icon' : 'fa fa-eye-slash icon'" matIconSuffix></i>
-                </mat-form-field>
-              </div>
-
+            <form [formGroup]="loginForm" *ngIf="!credentialsChecked && !showLoadingCircle" (ngSubmit)="checkCredentials(password.value)" class="form">
+              <h3><i class="fas fa-key header-icon"></i>Anmeldedaten</h3>
+              <mat-form-field appearance="fill">
+                <mat-label>Benutzername oder E-Mail</mat-label>
+                <input formControlName="username" type="text" matInput required/>
+              </mat-form-field>
+              <mat-error *ngIf="loginForm.get('username').hasError('required')">Geben Sie Ihren Benutzernamen oder Ihre E-Mail-Adresse ein.</mat-error>
+              <mat-form-field appearance="fill">
+                <mat-label>Passwort</mat-label>
+                <input formControlName="password" type="password" matInput required/>
+              </mat-form-field>
+              <mat-checkbox class="checkbox" formControlName="stayLoggedIn" (change)="stayLoggedInChange($event)">Angemeldet bleiben</mat-checkbox>
+              <mat-error *ngIf="loginForm.get('password').hasError('required')">Geben Sie Ihr Passwort ein.</mat-error>
               <div class="alert">
                 <div *ngIf="password.invalid && password.touched && password.errors && password.errors['required']">Geben Sie Ihr Passwort ein.</div>
               </div>
               <div class="login-button">
-                <button (click)="checkCredentials(password)" (window:keypress.enter)="checkCredentials(password)" [disabled]="!loginCredentials.valid || loginDisabled || isLoggingIn" [ngClass]="loginCredentials.valid || !loginDisabled ? 'btn btn-submit' : 'btn btn-disabled'" value="SendUsername">
+                <button (click)="checkCredentials(password.value)" (window:keypress.enter)="checkCredentials(password.value)" [disabled]="!loginForm.valid || loginDisabled || isLoggingIn" [ngClass]="loginForm.valid || !loginDisabled ? 'btn btn-submit' : 'btn btn-disabled'" value="SendUsername">
                   <i class="fa fa-arrow-right btn-icon"></i>Weiter
                 </button>
               </div>
             </form>
 
             <!-- STEP 2: 2FA Code + stay logged in + app select -->
-            <form #loginPasswortForm="ngForm" *ngIf="credentialsChecked && !showLoadingCircle" class="form" ngNativeValidate>
-              <div id="back">
-                <a (click)="credentialsChecked = false" class="link"><i class="link-icon fa fa-arrow-left"></i><span class="link-text-underline-hover">Zurück</span></a>
-              </div>
-              <div *ngIf="tfaEnabled" class="two-fa-code-wrapper">
-                <h3><i class="fa fa-mobile-screen header-icon"></i>Zweiter Faktor</h3>
-                <div class="two-fa-code-field">
-                  <mat-form-field appearance="fill">
-                    <mat-label>Zwei-Faktor-Code</mat-label>
-                    <input #codeInp="ngModel" [(ngModel)]="code" [disabled]="loginDisabled" matInput name="tfa" required role="presentation" />
-                  </mat-form-field>
-                </div>
-                <div *ngIf="codeInp && codeInp.invalid && (codeInp.dirty || codeInp.touched)" class="alert">
-                  <div *ngIf="codeInp.errors && codeInp.errors['required']">Geben Sie den Zweiten-Faktor-Code ein.</div>
-                </div>
-              </div>
-              <h3><i class="fa fa-gear header-icon"></i>Optionen</h3>
-              <div class="stay-logged-in">
-                <mat-checkbox (change)="stayLoggedInChange($event)" [(ngModel)]="stayLoggedIn" class="checkbox">Angemeldet bleiben </mat-checkbox>
-              </div>
-              <div class="login-button">
-                <button (click)="login()" (window:keypress.enter)="login()" [disabled]="!loginPasswortForm.valid || loginDisabled || isLoggingIn" [ngClass]="loginPasswortForm.valid || !loginDisabled ? 'btn btn-submit' : 'btn btn-disabled'">
-                  <i class="fa-solid fa-arrow-right-to-bracket btn-icon"></i>Anmelden
-                </button>
-              </div>
+            <form [formGroup]="loginMfaForm" *ngIf="credentialsChecked && tfaEnabled && !showLoadingCircle" class="form">
+              <mat-form-field appearance="fill" *ngIf="tfaEnabled">
+                <mat-label>Zwei-Faktor-Code</mat-label>
+                <input formControlName="tfa" type="text" matInput required/>
+              </mat-form-field>
+              <mat-error *ngIf="loginMfaForm.get('tfa').hasError('required')">Geben Sie den Zweiten-Faktor-Code ein.</mat-error>
+              <button [disabled]="loginMfaForm.invalid" mat-button>Anmelden</button>
             </form>
             <div *ngIf="loginSnoozeActive" class="alert">
               <p class="alert">
