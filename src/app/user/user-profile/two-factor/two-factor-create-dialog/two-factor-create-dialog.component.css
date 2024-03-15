@@ -1,0 +1,23 @@
+.btn {
+    margin-right: 8px;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version. */
+/* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version. */
+mat-dialog-actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: right;
+}
+
+.otp-secret {
+    font-size: large !important;
+    letter-spacing: 8px;
+    line-break: anywhere;
+    text-align: center;
+}
+
+.copyToClipboardTooltip {
+    display: flex;
+    justify-content: right;
+}

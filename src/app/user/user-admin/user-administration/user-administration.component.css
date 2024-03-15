@@ -1,0 +1,26 @@
+table.mat-mdc-table {
+    display: table;
+    width: 100%;
+}
+
+table {
+    position: sticky;
+}
+
+.action-buttons {
+    margin-top: 12px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+::ng-deep .action-icon {
+    margin-right: 8px !important;
+    vertical-align: baseline !important;
+    font-size: 16px !important;
+}
+
+.btn-disabled:hover {
+    color: var(--cps-gray-default);
+    border: 1px var(--cps-gray-border) solid;
+}

@@ -1,0 +1,53 @@
+<div class="titlebox">
+  <h1 class="title">Benutzerprofil</h1>
+</div>
+<div class="change-password">
+  <h3>Passwort ändern</h3>
+  <form #changePasswordForm="ngForm" (ngSubmit)="onSubmit(changePasswordForm)" class="form" ngNativeValidate>
+    <div class="form">
+      <div class="password-field">
+        <label class="inp" for="oldPassword">
+          <input #oldPasswort="ngModel" type="password" id="oldPassword" name="oldPasswort" ngModel placeholder="&nbsp;" required />
+          <span class="label">Aktuelles Passwort</span>
+          <span class="focus-bg"></span>
+        </label>
+      </div>
+    </div>
+    <div *ngIf="oldPasswort && oldPasswort.invalid && (oldPasswort.dirty || oldPasswort.touched)" class="alert">
+      <div *ngIf="oldPasswort.errors && oldPasswort.errors.required">Geben Sie Ihr derzeitiges Passwort an.</div>
+    </div>
+    <div class="form">
+      <div class="password-field">
+        <label class="inp" for="newPassword">
+          <input #newPasswort="ngModel" (ngModelChange)="checkPasswords(newPasswort.value, newPasswortCheck.value)" type="password" id="newPassword" name="newPasswort" ngModel placeholder="&nbsp;" required />
+          <span class="label">Neues Passwort</span> <span class="focus-bg"></span>
+        </label>
+      </div>
+    </div>
+    <div *ngIf="newPasswort && newPasswort.invalid && (newPasswort.dirty || newPasswort.touched)" class="alert">
+      <div *ngIf="newPasswort.errors && newPasswort.errors.required">Geben Sie Ihr neues Passwort an.</div>
+    </div>
+    <div class="form">
+      <div class="password-field">
+        <label class="inp" for="newPasswordCheck">
+          <input #newPasswortCheck="ngModel" (ngModelChange)="checkPasswords(newPasswort.value, newPasswortCheck.value)" type="password" id="newPasswordCheck" name="newPasswortCheck" ngModel placeholder="&nbsp;" required />
+          <span class="label">Neues Passwort bestätigen</span> <span class="focus-bg"></span>
+        </label>
+      </div>
+    </div>
+    <div *ngIf="(newPasswortCheck && newPasswortCheck.invalid && (newPasswortCheck.dirty || newPasswortCheck.touched)) || passwordsNotIdentical || passwordNotFitPolicy" class="alert">
+      <div *ngIf="newPasswortCheck.errors && newPasswortCheck.errors.required">Geben Sie Ihr neues Passwort bitte nochmal ein.</div>
+      <div *ngIf="passwordsNotIdentical === true && newPasswortCheck.value && newPasswortCheck.value.length > 0">Das neue Passwort und die wiederholte Eingabe stimmen nicht überein.</div>
+        {{ "Das neue Passwort entspricht nicht der Passwort-Richtlinie. " }}
+    </div>
+      <button
+        [disabled]="!changePasswordForm.valid || passwordsNotIdentical"
+        [ngClass]="changePasswordForm.valid && !passwordsNotIdentical ? 'btn' : 'btn btn-disabled'"
+        class="btn submit"
+        type="submit"
+        value="Send"
+      >
+        <i class="fa fa-key btn-icon"></i>Passwort ändern
+      </button>
+  </form>
+</div>

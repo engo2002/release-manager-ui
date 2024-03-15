@@ -1,0 +1,26 @@
+<div id="titlebox">
+    <h1 id="title">Zweiter Faktor</h1>
+</div>
+<div class="back">
+    <a [routerLink]="'/user/profile'" class="link"><i class="fa fa-arrow-left link-icon"></i><span class="link-text-underline-hover">Zurück zum Profil</span></a>
+</div>
+<div class="2fa-container">
+    <div *ngIf="twoFactorActive" class="2fa-active-container">
+        <h1>Status</h1>
+        <p>Zwei-Faktor-Authentifizierung ist aktiv.</p>
+        <h1>Zweiten Faktor konfigurieren</h1>
+        <div class="2fa-active-buttons">
+            <button (click)="delete2Fa()" class="btn btn-white-border-gray"><i class="fa-solid fa-mobile-screen"></i><i class="fa fa-minus btn-icon"></i>Zweiten Faktor trennen</button>
+        </div>
+    </div>
+    <div *ngIf="!twoFactorActive" class="2fa-inactive-container">
+        <h1>Status</h1>
+        <p>Die Zwei-Faktor-Authentifizierung ist nicht aktiv.</p>
+        <h1>Zweiten Faktor konfigurieren</h1>
+        <p>
+            Um einen zweiten Faktor (bspw. Google Authenticator) zu hinterlegen, klicken Sie auf "Zweiten Faktor hinzufügen". Halten Sie Ihre 2FA-App bereit. <br />
+            Bei Verlust des 2FA-Gerätes kann ein Administrator über die Benutzerverwaltung Ihre Zwei-Faktor-Authentifizierung zurücksetzen.
+        </p>
+        <button (click)="add2Fa()" class="btn"><i class="fa-solid fa-mobile-screen"></i><i class="fa fa-plus btn-icon"></i>Zweiten Faktor hinzufügen</button>
+    </div>
+</div>

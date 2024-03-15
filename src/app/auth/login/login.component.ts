@@ -114,6 +114,7 @@ export class LoginComponent implements OnInit, OnDestroy{
         this.loginDisabled = true;
         this.isLoggedIn = true;
         this.authService.setLoginStatus(loginstatus);
+        this.router.navigate(["/projects"]);
         return loginstatus;
       }),
       catchError(() => {

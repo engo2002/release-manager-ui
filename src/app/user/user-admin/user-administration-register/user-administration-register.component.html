@@ -1,0 +1,71 @@
+<div style="display: block">
+    <div id="titlebox">
+        <h1 id="title">Benutzerverwaltung</h1>
+        <h2 id="subtitle">Benutzer registrieren</h2>
+    </div>
+    <div id="backToList">
+        <a (click)="router.navigate(['user/admin'])" class="link" id="backToList"><i class="link-icon fa fa-arrow-left"></i><span class="link-text-underline-hover">Zurück zur Benutzerverwaltung</span></a>
+    </div>
+    <form #registerUserForm="ngForm" (ngSubmit)="onSubmit(registerUserForm)" class="form" ngNativeValidate>
+        <div class="form">
+            <label class="inp" for="username">
+                <input #username="ngModel" autocomplete="new-password" id="username" name="username" ngModel placeholder="&nbsp;" required role="presentation" type="text" />
+                <span class="label">* Benutzername</span>
+                <span class="focus-bg"></span>
+            </label>
+        </div>
+        <div *ngIf="username && username.invalid && (username.dirty || username.touched)" class="alert">
+            <div *ngIf="username.errors && username.errors.required">Geben Sie einen Benutzernamen an.</div>
+        </div>
+        <div class="form">
+            <label class="inp" for="fullname">
+                <input #fullname="ngModel" id="fullname" name="fullname" ngModel placeholder="&nbsp;" required role="presentation" type="text" />
+                <span class="label">* Vollständiger Name</span>
+                <span class="focus-bg"></span>
+            </label>
+        </div>
+        <div *ngIf="fullname && fullname.invalid && (fullname.dirty || fullname.touched)" class="alert">
+            <div *ngIf="fullname.errors && fullname.errors.required">Geben Sie den vollständigen Namen des Benutzers an.</div>
+        </div>
+        <div class="form">
+            <label class="inp" for="password">
+                <input #password="ngModel" autocomplete="new-password" id="password" name="password" ngModel placeholder="&nbsp;" required role="presentation" type="password" />
+                <span class="label">* Passwort</span>
+                <span class="focus-bg"></span>
+            </label>
+        </div>
+        <div *ngIf="password && password.invalid && (password.dirty || password.touched)" class="alert">
+            <div *ngIf="password.errors && password.errors.required">Geben Sie ein Passwort für den Benutzer an.</div>
+        </div>
+        <div class="form">
+            <label class="inp" for="email">
+                <input #email="ngModel" [email]="true" autocomplete="new-password" id="email" name="email" ngModel placeholder="&nbsp;" required role="presentation" type="email" />
+                <span class="label">* E-Mail-Adresse</span>
+                <span class="focus-bg"></span>
+            </label>
+        </div>
+        <div *ngIf="email && email.invalid && (email.dirty || email.touched)" class="alert">
+            <div *ngIf="email.errors && email.errors.required">Geben Sie eine E-Mail-Adresse für den Benutzer an.</div>
+            <div *ngIf="email.invalid && email.touched && email.errors && !email.errors.required">Geben Sie eine korrekte E-Mail-Adresse an.</div>
+        </div>
+        <div class="formelement formelement-first">
+            <mat-form-field appearance="fill" class="selectbox">
+                <mat-label>* Primäre Rolle</mat-label>
+                <mat-select (selectionChange)="getSelectedValuePrimary($event)">
+                  <mat-option value="Admin">Admin</mat-option>
+                  <mat-option value="Viewer">Beobachter</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="formelement">
+            <mat-form-field appearance="fill" class="selectbox">
+                <mat-label>Sekundäre Rolle</mat-label>
+                <mat-select (selectionChange)="getSelectedValueSecondary($event)">
+                    <mat-option value="Admin">Admin</mat-option>
+                    <mat-option value="Viewer">Beobachter</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <button #submit [disabled]="!registerUserForm.valid || !primaryRole" [ngClass]="!submit.disabled && !!primaryRole ? 'btn btn-submit' : 'btn btn-disabled'" type="submit" value="Send"><i class="btn-icon fa fa-user-plus"></i> Benutzer erstellen</button>
+    </form>
+</div>

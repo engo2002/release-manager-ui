@@ -1,7 +1,7 @@
 import { inject } from "@angular/core";
 import { of } from "rxjs";
-import { AuthService } from "../services/auth/auth.service";
 import { switchMap } from "rxjs/operators";
+import { AuthService } from "../auth/auth.service";
 
 export const UserDataGuard = () => {
     const authService = inject(AuthService);

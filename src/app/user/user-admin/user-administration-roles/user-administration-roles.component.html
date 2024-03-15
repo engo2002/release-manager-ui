@@ -1,0 +1,32 @@
+<div class="user-change-roles">
+    <div id="titlebox">
+        <h1 id="title">Benutzerverwaltung</h1>
+        <h2 id="subtitle">Benutzer-Rollen ändern</h2>
+    </div>
+    <div id="backToList">
+        <a (click)="router.navigate(['user/admin'])" class="link" id="backToList"><i class="link-icon fa fa-arrow-left"></i><span class="link-text-underline-hover">Zurück zur Benutzerverwaltung</span></a>
+    </div>
+    <h3>Benutzerrollen für {{ fullname }} ändern</h3>
+    <form #changeRolesForm="ngForm" (ngSubmit)="onSubmit()" class="form" ngNativeValidate>
+        <div class="formelement formelement-first">
+            <mat-form-field appearance="fill" class="selectbox">
+                <mat-label>* Primäre Rolle</mat-label>
+                <mat-select (selectionChange)="getSelectedValuePrimary($event)">
+                  <mat-option value="Admin">Admin</mat-option>
+                  <mat-option value="Viewer">Viewer</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="formelement">
+            <mat-form-field appearance="fill" class="selectbox">
+                <mat-label>Sekundäre Rolle</mat-label>
+                <mat-select (selectionChange)="getSelectedValueSecondary($event)">
+                    <mat-option [value]="null">Keine</mat-option>
+                    <mat-option value="Admin">Admin</mat-option>
+                    <mat-option value="Viewer">Viewer</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <button #submit [disabled]="!changeRolesForm.valid || !primaryRole" [ngClass]="!submit.disabled ? 'btn btn-submit' : 'btn btn-disabled'" type="submit" value="Send"><i class="btn-icon fa fa-user-shield"></i> Benutzerrollen ändern</button>
+    </form>
+</div>

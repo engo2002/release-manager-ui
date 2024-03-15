@@ -1,5 +1,5 @@
 h1 {
-    color: var(--rm-white) !important;
+    color: var(--engo-white) !important;
     margin-left: 20px;
 }
 
@@ -28,8 +28,8 @@ h1 {
     position: fixed;
     top: 0;
     left: -250px;
-    background-color: var(--rm-dark-blue);
-    color: var(--rm-white);
+    background-color: var(--engo-dark-blue);
+    color: var(--engo-white);
     transition: left 0.3s ease;
 }
 .show-menu {

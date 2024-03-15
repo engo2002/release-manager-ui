@@ -1,3 +1,23 @@
 <div class="menu-category">
 	<button class="btn menu-category-button" routerLink="/projects/overview">Projekte</button>
 </div>
+<div class="menu-category user">
+  <button *ngIf="authService.isLoggedIn" [matMenuTriggerFor]="user" class="btn menu-category-button">
+    <i class="fa fa-user-circle btn-icon"></i>
+        {{!!authService.loggedInStatus.fullname ? authService.loggedInStatus.fullname : 'Benutzeraktionen'}}
+  </button>
+  <mat-menu #user="matMenu">
+    <button (click)="toUserProfile()" mat-menu-item>
+      <i class="fa fa-user-edit navbar-icons"></i>
+      Benutzerprofil
+    </button>
+    <button (click)="toUserAdmin()" *ngIf="showLinkUserAdmin" mat-menu-item>
+      <i class="fa fa-users navbar-icons"></i>
+      Benutzerverwaltung
+    </button>
+    <button (click)="logout()" *ngIf="showLinkLogout" mat-menu-item>
+      <i class="fa fa-sign-out-alt navbar-icons"></i>
+      Abmelden
+    </button>
+  </mat-menu>
+</div>

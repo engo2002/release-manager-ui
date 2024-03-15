@@ -3,7 +3,7 @@
 
 /* Globale Stile */
 :root {
-  --rm-dark-blue: #004d99; /* Beispiel für eine dunkelblaue Farbe */
+  --engo-dark-blue: #004d99; /* Beispiel für eine dunkelblaue Farbe */
 }
 
 /* Footer-Stile */
@@ -40,5 +40,5 @@ body {
 }
 
 .github-link:hover {
-  color: var(--rm-gray) !important;
+  color: var(--engo-gray) !important;
 }

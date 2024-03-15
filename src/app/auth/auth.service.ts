@@ -154,16 +154,16 @@ export class AuthService {
         this.logoutEndpoint(this.refreshToken).subscribe({
             next:
               () => {
-                this.router.navigate(["logout"], {queryParams: {expired: sessionExpired}});
+                this.router.navigate(["/"], {queryParams: {expired: sessionExpired}});
               },
             error:
               () => {
-                this.router.navigate(["logout"], {queryParams: {expired: sessionExpired}});
+                this.router.navigate(["/"], {queryParams: {expired: sessionExpired}});
               },
           },
         );
       } else {
-        this.router.navigate(["logout"], {queryParams: {expired: sessionExpired}});
+        this.router.navigate(["/"], {queryParams: {expired: sessionExpired}});
       }
     }
 

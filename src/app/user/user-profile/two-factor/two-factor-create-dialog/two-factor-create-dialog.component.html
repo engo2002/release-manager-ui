@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Zweiten Faktor hinzufügen</h2>
+<mat-dialog-content>
+    <p *ngIf="!generated" class="hint">Bitte geben Sie zur Verifizierung Ihr Passwort ein.</p>
+    <engo-uik-forms (submitData)="onSubmit($event)" *ngIf="!generated" [formStructure]="formStructure"></engo-uik-forms>
+    <p *ngIf="showError" class="alert">Bitte prüfen Sie das Passwort!</p>
+
+    <div *ngIf="generated" class="otp-credentials-container">
+        <p class="hint">
+            Bitte scannen Sie mit Ihrer 2FA-App den QR-Code oder geben Sie den Einrichtungsschlüssel ein. <br />
+            Nach der erfolgreichen Einrichtung werden Sie automatisch abgemeldet.
+        </p>
+
+        <h3>QR-Code</h3>
+        <qrcode [qrdata]="otpUrl"></qrcode>
+
+        <h3>Einrichtungsschlüssel</h3>
+        <div class="copyToClipboardTooltip">
+            <a (click)="copyToClipboard()" *ngIf="!hasCopied" class="link"> <i class="fa fa-clipboard link-icon"></i> Schlüssel kopieren </a>
+            <a (click)="hasCopied = false" *ngIf="hasCopied" class="link link-gray"> <i class="fa fa-check-circle link-icon"></i> Schlüssel kopiert </a>
+        </div>
+        <p class="otp-secret">{{ otpSecret }}</p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="dialog-actions">
+    <button (click)="discard()" [class.btn-disabled]="generated" [disabled]="generated" class="btn btn-white-border-gray"><i class="fa fa-ban btn-icon"></i>Abbrechen</button>
+    <button (click)="toLogout()" [class.btn-disabled]="!generated" [disabled]="!generated" class="btn"><i class="fa fa-plus btn-icon"></i>Einrichtung abschließen</button>
+</mat-dialog-actions>

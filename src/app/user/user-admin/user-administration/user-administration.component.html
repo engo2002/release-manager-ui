@@ -1,0 +1,25 @@
+<div id="titlebox">
+    <h1 id="title">Benutzerverwaltung</h1>
+</div>
+<div class="action-buttons">
+    <div class="register-container">
+        <button (click)="this.router.navigate(['/user/admin/register'])" [class.btn-disabled]="!hasRightWriteUsers" [disabled]="!hasRightWriteUsers" class="btn btn-action-button"><i class="fa fa-user-plus btn-icon"></i>Benutzer registrieren</button>
+    </div>
+    <div class="more-actions-container">
+        <engo-uik-table-more-actions (actionEmitter)="onMoreActions($event)" [actions]="moreActions" [faIcon]="'fa fa-user'" [label]="'Benutzeraktionen'"></engo-uik-table-more-actions>
+    </div>
+</div>
+<div class="user-table">
+    <engo-uik-table-loading *ngIf="loading"></engo-uik-table-loading>
+    <engo-uik-table-checkbox
+        (checkboxClickedSingleEmitter)="getSelectedUserData($event)"
+        *ngIf="!loading"
+        [columns]="columns"
+        [dataSource]="dataSource"
+        [enableFiltering]="true"
+        [enableMultipleChecked]="false"
+        [enablePagination]="true"
+        [enableSort]="false"
+        [showStatusLabel]="false"
+    ></engo-uik-table-checkbox>
+</div>

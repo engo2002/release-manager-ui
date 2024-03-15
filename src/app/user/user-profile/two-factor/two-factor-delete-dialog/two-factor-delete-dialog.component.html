@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Zweiten Faktor entfernen</h2>
+<mat-dialog-content>
+    <engo-uik-forms (submitData)="onSubmit($event)" [formStructure]="formStructure"></engo-uik-forms>
+    <p *ngIf="showError" class="alert">Bitte prüfen Sie das Passwort!</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button (click)="dialog.closeAll()" class="btn btn-white-border-gray"><i class="fa fa-ban btn-icon"></i>Abbrechen</button>
+</mat-dialog-actions>
