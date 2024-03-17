@@ -5,7 +5,9 @@ html {
 }
 
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: Roboto Condensed, sans-serif !important;
+  font-weight: 500 !important;
+  color: (--engo-black);
 }
 
 p {
